@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*.__pycache__/*
 *.py[cod]
 
 # C extensions
@@ -9,6 +10,7 @@ __pycache__/
 # Distribution / packaging
 bin/
 build/
+.idea/*
 develop-eggs/
 dist/
 eggs/
