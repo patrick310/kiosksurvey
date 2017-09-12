@@ -1,6 +1,10 @@
-<h1>{{ question.question_text }}</h1>
-<ul>
-    {% for choice in question.choice_set.all %}
-        <li>{{ choice.choice_text }}</li>
-    {% endfor %}
-</ul>
+<h1 xmlns="http://www.w3.org/1999/html">{{ question.question_text }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'surveys:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for option in question.option_set.all %}
+    <button name="option" id="{{ forloop.counter }}" type="submit" value="{{ option.id }}">{{ option.option_text }}</button>
+{% endfor %}
+</form>

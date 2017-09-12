@@ -6,11 +6,15 @@ from django.db import models
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
-    option_a = models.CharField(max_length=40)
-    option_b = models.CharField(max_length=40)
+
+    def __str__(self):
+        return self.question_text
 
 
-class Choice(models.Model):
+class Option(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
+    option_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.option_text
