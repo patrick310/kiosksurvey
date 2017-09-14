@@ -1,14 +1,51 @@
 <style type = "text/css">
-
+    {% load static %}
     body {
-        background-image: url("https://cdn-iam.mercedes-benz.com//profile/images/wallpaper/mb-headlight-street-land-big-28e7b2c.jpg");
-            }
+        background: white url({% static "surveys/images/background.jpg" %}) no-repeat right bottom;
+    }
+
 
 </style><br><br><br>
-<div style = "padding: 1px 10px 40px 10px; margin: 0px 400px 0px 400px; background-color:white; box-shadow: inset 0 0 1em black, 0 0 1em black">
+<div style = "height: 85%; border-radius: 1%; padding: 1px 10px 40px 10px; margin: 0px 400px 0px 400px; background-color:white; box-shadow: inset 0 0 1em black, 0 0 1em black">
 <head>
+<style>
 
-    <text style = "font-family: Arial; font-size: 200%; width: 70%; text-align: center;">
+    .button {
+
+    display: inline-block;
+    width: 40%;
+    height: 27%;
+    cursor: pointer;
+    text-align: center;
+    outline: none;
+    color: #fff;
+    font-size: 250%;
+    text-decoration: none;
+    background-color:dodgerblue;
+    border-radius: 5%;
+    horizontal-align:middle;
+    vertical-align:middle;
+    border-color: gray;
+    margin: 15px 30px 15px 30px;
+    border-style: none;
+    box-shadow: inset 0 0 0 black, 0 0 0.3em black
+}
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+</style>
+
+<text style = "
+font-family: Arial;
+font-size: 200%;
+width: 70%;
+text-align: center;
+">
 
 
 
@@ -17,21 +54,20 @@
 
 </head>
 </text>
-<div style = "padding: 20px 0px 10px 0px; background-color:darkgrey;">
-<center>
+<div style = "20px 0px 10px 0px; background-color:darkgrey;">
+<div style="text-align: center;">
 
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-    <form action="{% url 'surveys:vote' question.id %}" method="post">
+<form action="{% url 'surveys:vote' question.id %}" method="post">
 
-    {% csrf_token %}
+{% csrf_token %}
 
-    {% for option in question.option_set.all %}
-        <button style = "width: 40%; height: 27%; font-size: 250%; text-decoration: none; background-color:dodgerblue; border-radius: 5%; horizontal-align:middle; vertical-align:middle; border-color: gray; margin: 15px 30px 15px 30px; border-style: none; box-shadow: inset 0 0 0em black, 0 0 0.3em black"; name="option" id="{{ forloop.counter }}" type="submit" value="{{ option.id }}">{{ option.option_text }}</button>
-    {% endfor %}
+{% for option in question.option_set.all %}
+    <button class="button" name="option" id="{{ forloop.counter }}" type="submit" value="{{ option.id }}">{{ option.option_text }}</button>
+{% endfor %}
 
-    </form>
+</form>
 
-</center>
 </div>
 </div>
